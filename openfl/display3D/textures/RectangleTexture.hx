@@ -2,11 +2,11 @@ package openfl.display3D.textures; #if !flash
 
 
 import openfl.display.BitmapData;
-import openfl.gl.GL;
-import openfl.gl.GLTexture;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLTexture;
 import openfl.geom.Rectangle;
 import openfl.utils.ByteArray;
-import openfl.utils.UInt8Array;
+import lime.utils.UInt8Array;
 
 
 class RectangleTexture extends TextureBase {

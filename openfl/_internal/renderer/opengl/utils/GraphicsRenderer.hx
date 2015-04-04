@@ -34,8 +34,8 @@ import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
-import openfl.gl.GLTexture;
-import openfl.utils.Int16Array;
+import lime.graphics.opengl.GLTexture;
+import lime.utils.Int16Array;
 import openfl.Vector;
 
 

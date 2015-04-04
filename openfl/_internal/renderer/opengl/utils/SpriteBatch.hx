@@ -13,8 +13,8 @@ import openfl.geom.ColorTransform;
 import openfl.geom.Matrix;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
-import openfl.gl.GLBuffer;
-import openfl.gl.GLTexture;
+import lime.graphics.opengl.GLBuffer;
+import lime.graphics.opengl.GLTexture;
 import openfl.display.BlendMode;
 import lime.utils.*;
 

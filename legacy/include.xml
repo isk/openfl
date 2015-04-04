@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension>
+	
+	<section unless="display">
+		
+		<ndll name="openfl-legacy" dir="legacy/ndll" />
+		
+		<dependency name="extension-api" path="dependencies/extension-api" if="android" />
+		
+	</section>
+	
+	<templatePath name="templates" />
+	
+</extension>

@@ -9,12 +9,12 @@ class GraphicsEndFill extends IGraphicsData implements IGraphicsFill {
 	
 	public function new () {
 		
-		super (lime_graphics_end_fill_create ());
+		super (openfl_legacy_graphics_end_fill_create ());
 		
 	}
 	
 	
-	private static var lime_graphics_end_fill_create = Lib.load ("lime", "lime_graphics_end_fill_create", 0);
+	private static var openfl_legacy_graphics_end_fill_create = Lib.load ("openfl-legacy", "openfl_legacy_graphics_end_fill_create", 0);
 	
 	
 }

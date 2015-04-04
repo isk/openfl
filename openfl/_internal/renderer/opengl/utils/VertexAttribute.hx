@@ -1,8 +1,8 @@
 package openfl._internal.renderer.opengl.utils;
 
 import lime.graphics.opengl.GL;
-import openfl.utils.ArrayBufferView;
-import openfl.utils.Float32Array;
+import lime.utils.ArrayBufferView;
+import lime.utils.Float32Array;
 
 
 class VertexAttribute {

@@ -2,9 +2,9 @@ package openfl._internal.renderer.opengl.utils;
 
 import lime.graphics.GLRenderContext;
 import lime.utils.Float32Array;
-import openfl.gl.GLBuffer;
-import openfl.utils.ArrayBuffer;
-import openfl.utils.ArrayBufferView;
+import lime.graphics.opengl.GLBuffer;
+import lime.utils.ArrayBuffer;
+import lime.utils.ArrayBufferView;
 
 class VertexArray {
 

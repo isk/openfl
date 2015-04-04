@@ -68,7 +68,7 @@ class Accelerometer extends EventDispatcher {
 	@:noCompletion private function __update ():Void {
 		
 		var event = new AccelerometerEvent (AccelerometerEvent.UPDATE);
-		var data = lime_input_get_acceleration ();
+		var data = openfl_legacy_input_get_acceleration ();
 		
 		event.timestamp = Timer.stamp ();
 		event.accelerationX = data.x;
@@ -87,7 +87,7 @@ class Accelerometer extends EventDispatcher {
 	
 	
 	
-	private static function get_isSupported ():Bool { return lime_input_get_acceleration () != null; }
+	private static function get_isSupported ():Bool { return openfl_legacy_input_get_acceleration () != null; }
 	
 	
 	
@@ -97,7 +97,7 @@ class Accelerometer extends EventDispatcher {
 	
 	
 	
-	private static var lime_input_get_acceleration = Lib.load ("lime", "lime_input_get_acceleration", 0);
+	private static var openfl_legacy_input_get_acceleration = Lib.load ("openfl-legacy", "openfl_legacy_input_get_acceleration", 0);
 	
 	
 }

@@ -16,12 +16,12 @@ class GraphicsSolidFill extends IGraphicsData implements IGraphicsFill {
 		this.color = color;
 		this.alpha = alpha;
 		
-		super (lime_graphics_solid_fill_create (color, alpha));
+		super (openfl_legacy_graphics_solid_fill_create (color, alpha));
 		
 	}
 	
 	
-	private static var lime_graphics_solid_fill_create = Lib.load ("lime", "lime_graphics_solid_fill_create", 2);
+	private static var openfl_legacy_graphics_solid_fill_create = Lib.load ("openfl-legacy", "openfl_legacy_graphics_solid_fill_create", 2);
 	
 	
 }

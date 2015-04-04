@@ -15,7 +15,7 @@ class WeakRef<T> {
 		
 		if (makeWeak) {
 			
-			weakRef = lime_weak_ref_create (this, object);
+			weakRef = openfl_legacy_weak_ref_create (this, object);
 			hardRef = null;
 			
 		} else {
@@ -42,7 +42,7 @@ class WeakRef<T> {
 			
 		}
 		
-		var result = lime_weak_ref_get (weakRef);
+		var result = openfl_legacy_weak_ref_get (weakRef);
 		if (result == null) {
 			
 			weakRef = -1;
@@ -74,8 +74,8 @@ class WeakRef<T> {
 	
 	
 	
-	private static var lime_weak_ref_create:Dynamic = Lib.load ("lime", "lime_weak_ref_create", 2);
-	private static var lime_weak_ref_get:Dynamic = Lib.load ("lime", "lime_weak_ref_get", 1);
+	private static var openfl_legacy_weak_ref_create:Dynamic = Lib.load ("openfl-legacy", "openfl_legacy_weak_ref_create", 2);
+	private static var openfl_legacy_weak_ref_get:Dynamic = Lib.load ("openfl-legacy", "openfl_legacy_weak_ref_get", 1);
 	
 	
 }

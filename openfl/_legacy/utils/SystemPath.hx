@@ -28,11 +28,11 @@ class SystemPath {
 	
 	
 	
-	private static function get_applicationDirectory ():String { return lime_filesystem_get_special_dir (APP); }
-	private static function get_applicationStorageDirectory ():String { return lime_filesystem_get_special_dir (STORAGE); }
-	private static function get_desktopDirectory ():String { return lime_filesystem_get_special_dir (DESKTOP); }
-	private static function get_documentsDirectory ():String { return lime_filesystem_get_special_dir (DOCS); }
-	private static function get_userDirectory ():String { return lime_filesystem_get_special_dir (USER); }
+	private static function get_applicationDirectory ():String { return openfl_legacy_filesystem_get_special_dir (APP); }
+	private static function get_applicationStorageDirectory ():String { return openfl_legacy_filesystem_get_special_dir (STORAGE); }
+	private static function get_desktopDirectory ():String { return openfl_legacy_filesystem_get_special_dir (DESKTOP); }
+	private static function get_documentsDirectory ():String { return openfl_legacy_filesystem_get_special_dir (DOCS); }
+	private static function get_userDirectory ():String { return openfl_legacy_filesystem_get_special_dir (USER); }
 	
 	
 	
@@ -44,13 +44,13 @@ class SystemPath {
 	
 	#if !android
 	
-	private static var lime_filesystem_get_special_dir = Lib.load ("lime", "lime_filesystem_get_special_dir", 1);
+	private static var openfl_legacy_filesystem_get_special_dir = Lib.load ("openfl-legacy", "openfl_legacy_filesystem_get_special_dir", 1);
 	
 	#else
 	
 	private static var jni_filesystem_get_special_dir:Dynamic = null;
 	
-	private static function lime_filesystem_get_special_dir (inWhich:Int):String {
+	private static function openfl_legacy_filesystem_get_special_dir (inWhich:Int):String {
 		
 		if (jni_filesystem_get_special_dir == null) {
 			

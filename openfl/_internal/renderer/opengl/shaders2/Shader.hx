@@ -3,9 +3,9 @@ package openfl._internal.renderer.opengl.shaders2;
 import lime.graphics.GLRenderContext;
 import openfl._internal.renderer.opengl.utils.VertexArray;
 import openfl._internal.renderer.opengl.utils.VertexAttribute;
-import openfl.gl.GLProgram;
-import openfl.gl.GLShader;
-import openfl.gl.GLUniformLocation;
+import lime.graphics.opengl.GLProgram;
+import lime.graphics.opengl.GLShader;
+import lime.graphics.opengl.GLUniformLocation;
 
 class Shader {
 	

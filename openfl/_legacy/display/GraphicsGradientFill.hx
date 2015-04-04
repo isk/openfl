@@ -21,7 +21,7 @@ class GraphicsGradientFill extends IGraphicsData implements IGraphicsFill {
 	
 	public function new (type:GradientType = null, colors:Array<Int> = null, alphas:Array<Float> = null, ratios:Array<Float> = null, matrix:Matrix = null, spreadMethod:SpreadMethod = null, interpolationMethod:InterpolationMethod = null, focalPointRatio:Float = 0):Void {
 		
-		super (lime_graphics_solid_fill_create (0, 1));
+		super (openfl_legacy_graphics_solid_fill_create (0, 1));
 		
 		if (type == null) {
 			
@@ -53,7 +53,7 @@ class GraphicsGradientFill extends IGraphicsData implements IGraphicsFill {
 	}
 	
 	
-	private static var lime_graphics_solid_fill_create = Lib.load ("lime", "lime_graphics_solid_fill_create", 2);
+	private static var openfl_legacy_graphics_solid_fill_create = Lib.load ("openfl-legacy", "openfl_legacy_graphics_solid_fill_create", 2);
 	
 	
 }

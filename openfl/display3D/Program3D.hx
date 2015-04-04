@@ -1,9 +1,9 @@
 package openfl.display3D; #if !flash
 
 
-import openfl.gl.GL;
-import openfl.gl.GLProgram;
-import openfl.gl.GLShader;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLProgram;
+import lime.graphics.opengl.GLShader;
 
 
 class Program3D {

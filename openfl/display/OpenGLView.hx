@@ -7,7 +7,7 @@ import openfl._internal.renderer.RenderSession;
 #end
 import openfl.display.Stage;
 import openfl.geom.Rectangle;
-import openfl.gl.GL;
+import lime.graphics.opengl.GL;
 import openfl.Lib;
 
 #if js

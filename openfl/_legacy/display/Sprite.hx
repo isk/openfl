@@ -13,7 +13,7 @@ class Sprite extends DisplayObjectContainer {
 	
 	public function new () {
 		
-		super (DisplayObjectContainer.lime_create_display_object_container (), __getType ());
+		super (DisplayObjectContainer.openfl_legacy_create_display_object_container (), __getType ());
 		
 		useHandCursor = true;
 		buttonMode = false;

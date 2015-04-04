@@ -1,0 +1,128 @@
+<xml>
+	
+	<set name="PLATFORM" value="android-9" if="android" />
+	<set name="PLATFORM" value="android-14" if="HXCPP_X86" />
+	<set name="HXCPP_CPP11" value="1" />
+	<set name="debug" value="debug" if="fulldebug" />
+	
+	<include name="${HXCPP}/build-tool/BuildCommon.xml" />
+	
+	<set name="LEGACY_PROJECT_ROOT" value="../project/" />
+	<set name="LEGACY_SRC_DIR" value="${LEGACY_PROJECT_ROOT}src" />
+	<set name="LEGACY_INCLUDE_DIR" value="${LEGACY_PROJECT_ROOT}include" />
+	<set name="LEGACY_SUPPORT_DIR" value="${LEGACY_PROJECT_ROOT}support" />
+	<set name="LEGACY_OUTPUT_DIR" value="../ndll" />
+	
+	<set name="NATIVE_TOOLKIT_PATH" value="${haxelib:lime}/project/lib" />
+	
+	<files id="openfl-legacy">
+		
+		<compilerflag value="-I${NATIVE_TOOLKIT_PATH}/sdl/include" />
+		<compilerflag value="-I${NATIVE_TOOLKIT_PATH}/sdl/include/configs/default/" unless="windows || mac || linux"/>
+		<compilerflag value="-I${NATIVE_TOOLKIT_PATH}/sdl/include/configs/linux/" if="linux"/>
+		<compilerflag value="-I${NATIVE_TOOLKIT_PATH}/sdl/include/configs/windows/" if="windows"/>
+		<compilerflag value="-I${NATIVE_TOOLKIT_PATH}/sdl/include/configs/mac/" if="mac"/>
+		
+		<compilerflag value="-I${LEGACY_INCLUDE_DIR}" />
+		
+		<compilerflag value="-DNME_PREMULTIPLIED_ALPHA" if="LEGACY_PREMULTIPLIED_ALPHA" />
+		<compilerflag value="-DNME_BUILDING_LIB" />
+		<compilerflag value="-DHX_LIME" />
+		<compilerflag value="-DNME_S3D" if="LEGACY_S3D" />
+		
+		<file name="${LEGACY_SRC_DIR}/ExternalInterface.cpp" />
+		<file name="${LEGACY_SRC_DIR}/empty/S3D.cpp" if="LEGACY_S3D" unless="android" />
+		<file name="${LEGACY_SRC_DIR}/common/Surface.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Utils.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Geom.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Graphics.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/GraphicsData.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Matrix.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/CachedExtent.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/TextField.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Font.cpp" />
+		<!-- <file name="${LEGACY_SRC_DIR}/common/FreeType.cpp" /> -->
+		<file name="${LEGACY_SRC_DIR}/common/Tilesheet.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Display.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Stage.cpp"/>
+		<file name="${LEGACY_SRC_DIR}/common/BitmapCache.cpp"/>
+		<file name="${LEGACY_SRC_DIR}/common/ColorTransform.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Hardware.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Tessellate.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Filters.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/ExternalInterface.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Cursors.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Input.cpp" unless="iphone" />
+		<!-- <file name="${LEGACY_SRC_DIR}/common/SurfaceIO.cpp" unless="sdl_image" /> -->
+		<file name="${LEGACY_SRC_DIR}/common/ManagedStage.cpp" unless="winrt" />
+		<file name="${LEGACY_SRC_DIR}/common/CURL.cpp" if="LEGACY_CURL" />
+		<file name="${LEGACY_SRC_DIR}/common/Lzma.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Thread.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/Camera.cpp" if="LEGACY_CAMERA" />
+		<!--<file name="common/Audio.cpp" if="openal" />-->
+		
+		<file name="${LEGACY_SRC_DIR}/common/XML/tinystr.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/XML/tinyxml.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/XML/tinyxmlerror.cpp" />
+		<file name="${LEGACY_SRC_DIR}/common/XML/tinyxmlparser.cpp" />
+		
+		<file name="${LEGACY_SRC_DIR}/software-renderer/AlphaMask.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/BitmapFill.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/BitmapFillPerspective.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/GradientFill.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/LineRender.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/PointRenderer.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/PolygonRender.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/SoftwareRenderer.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/SolidFill.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/SolidRender.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/TileRenderer.cpp" />
+		<file name="${LEGACY_SRC_DIR}/software-renderer/TriangleRender.cpp" />
+		
+		<!-- You will need this if you want USE_POLY2TRI in Tesselate.cpp
+		<file name="${LEGACY_SRC_DIR}/common/poly2tri/Poly2Tri.cpp" />
+		-->
+		
+		<file name="${LEGACY_SRC_DIR}/opengl/OpenGLContext.cpp" />
+		<file name="${LEGACY_SRC_DIR}/opengl/OGLTexture.cpp" />
+		<file name="${LEGACY_SRC_DIR}/opengl/OGLShaders.cpp" />
+		<file name="${LEGACY_SRC_DIR}/opengl/OGLExport.cpp" />
+		
+		<file name="${LEGACY_SRC_DIR}/lzma/LzFind.c" />
+		<file name="${LEGACY_SRC_DIR}/lzma/LzmaDec.c" />
+		<file name="${LEGACY_SRC_DIR}/lzma/LzmaEnc.c" />
+		<file name="${LEGACY_SRC_DIR}/lzma/LzFindMt.c" if="windows" />
+		<file name="${LEGACY_SRC_DIR}/lzma/Threads.c" if="windows" />
+		
+		<file name="${HXCPP}/project/libs/zlib/ZLib.cpp" if="ios" />
+		
+	</files>
+	
+	<set name="LEGACY_SLIBEXT" value=".lib" if="windows" />
+	<set name="LEGACY_SLIBEXT" value=".a" unless="windows" />
+	<set name="LEGACY_PRELIB" value="${LEGACY_DEV}/lib/${BINDIR}/lib" />
+	<set name="LEGACY_POSTLIB" value="${LIBEXTRA}${LEGACY_SLIBEXT}" />
+	<set name="LEGACY_DEBUGEXTRA" value="-debug" if="fulldebug" />
+	
+	<target id="default" output="${LIBPREFIX}openfl-legacy${MSVC_LIB_VERSION}${LEGACY_DEBUGEXTRA}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
+		
+		<outdir name="${LEGACY_OUTPUT_DIR}/${BINDIR}" />
+		
+		<files id="openfl-legacy" />
+		
+		<section unless="static_link">
+			
+			<ext value=".so" />
+			<ext value=".ndll" if="windows || mac || linux" />
+			
+			<section if="windows">
+				
+				<lib name="opengl32.lib" />
+				
+			</section>
+			
+		</section>
+		
+	</target>
+	
+</xml>

@@ -17,7 +17,7 @@ class ExternalInterface {
 		
 		if (!callbacks.exists (functionName)) {
 			
-			lime_external_interface_add_callback (functionName, handler);
+			openfl_legacy_external_interface_add_callback (functionName, handler);
 			
 		}
 		
@@ -36,7 +36,7 @@ class ExternalInterface {
 		if (p4 != null) params.push (p4);
 		if (p5 != null) params.push (p5);
 		
-		return lime_external_interface_call (functionName, params);
+		return openfl_legacy_external_interface_call (functionName, params);
 		
 	}
 	
@@ -57,7 +57,7 @@ class ExternalInterface {
 	
 	public static function registerCallbacks ():Void {
 		
-		lime_external_interface_register_callbacks ();
+		openfl_legacy_external_interface_register_callbacks ();
 		
 	}
 	
@@ -71,7 +71,7 @@ class ExternalInterface {
 	
 	private static function get_available ():Bool {
 		
-		return lime_external_interface_available ();
+		return openfl_legacy_external_interface_available ();
 		
 	}
 	
@@ -83,10 +83,10 @@ class ExternalInterface {
 	
 	
 	
-	private static var lime_external_interface_add_callback = Lib.load ("lime", "lime_external_interface_add_callback", 2);
-	private static var lime_external_interface_available = Lib.load ("lime", "lime_external_interface_available", 0);
-	private static var lime_external_interface_call = Lib.load ("lime", "lime_external_interface_call", 2);
-	private static var lime_external_interface_register_callbacks = Lib.load ("lime", "lime_external_interface_register_callbacks", 0);
+	private static var openfl_legacy_external_interface_add_callback = Lib.load ("openfl-legacy", "openfl_legacy_external_interface_add_callback", 2);
+	private static var openfl_legacy_external_interface_available = Lib.load ("openfl-legacy", "openfl_legacy_external_interface_available", 0);
+	private static var openfl_legacy_external_interface_call = Lib.load ("openfl-legacy", "openfl_legacy_external_interface_call", 2);
+	private static var openfl_legacy_external_interface_register_callbacks = Lib.load ("openfl-legacy", "openfl_legacy_external_interface_register_callbacks", 0);
 	
 	
 }

@@ -28,7 +28,7 @@ class Loader extends Sprite {
 		super ();
 		
 		contentLoaderInfo = LoaderInfo.create (this);
-		contentLoaderInfo.__onComplete = __onComplete;
+		//contentLoaderInfo.__onComplete = __onComplete;
 		
 	}
 

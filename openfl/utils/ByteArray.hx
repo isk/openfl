@@ -1,11 +1,8 @@
 package openfl.utils;
 
 
-#if !openfl_legacy
 typedef ByteArray = lime.utils.ByteArray;
-#else
-typedef ByteArray = openfl._legacy.utils.ByteArray;
-#end
+
 
 /*
 
@@ -15,7 +12,7 @@ import haxe.io.BytesBuffer;
 import haxe.io.BytesData;
 import haxe.io.Input;
 import openfl.errors.IOError;
-import openfl.utils.ArrayBuffer;
+import lime.utils.ArrayBuffer;
 
 #if js
 import js.html.DataView;

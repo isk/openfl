@@ -67,7 +67,7 @@ class JNI {
 		}
 		
 		return null;
-		//return lime_jni_create_interface(haxeClass, className, bytes == null ? null : bytes.getData());
+		//return openfl_legacy_jni_create_interface(haxeClass, className, bytes == null ? null : bytes.getData());
 		
 	}
 	
@@ -76,7 +76,7 @@ class JNI {
 		
 		init ();
 		
-		return new JNIMemberField (lime_jni_create_field (className, memberName, signature, false));
+		return new JNIMemberField (openfl_legacy_jni_create_field (className, memberName, signature, false));
 		
 	}
 	
@@ -86,7 +86,7 @@ class JNI {
 		init ();
 		
 		className = className.split (".").join ("/");
-		var handle = lime_jni_create_method (className, memberName, signature, false, quietFail);
+		var handle = openfl_legacy_jni_create_method (className, memberName, signature, false, quietFail);
 		
 		if (handle == null) {
 			
@@ -110,7 +110,7 @@ class JNI {
 		
 		init ();
 		
-		return new JNIStaticField (lime_jni_create_field (className, memberName, signature, true));
+		return new JNIStaticField (openfl_legacy_jni_create_field (className, memberName, signature, true));
 		
 	}
 	
@@ -120,7 +120,7 @@ class JNI {
 		init ();
 		
 		className = className.split (".").join ("/");
-		var handle = lime_jni_create_method (className, memberName, signature, true, quietFail);
+		var handle = openfl_legacy_jni_create_method (className, memberName, signature, true, quietFail);
 		
 		if (handle == null) {
 			
@@ -144,7 +144,7 @@ class JNI {
 		
 		init ();
 		
-		return lime_jni_get_env ();
+		return openfl_legacy_jni_get_env ();
 		
 	}
 	
@@ -154,7 +154,7 @@ class JNI {
 		if (!initialized) {
 			
 			initialized = true;
-			var method = Lib.load ("lime", "lime_jni_init_callback", 1);
+			var method = Lib.load ("openfl-legacy", "openfl_legacy_jni_init_callback", 1);
 			method (onCallback);
 			
 		}
@@ -185,12 +185,12 @@ class JNI {
 	
 	
 	
-	private static var lime_jni_create_field = Lib.load ("lime", "lime_jni_create_field", 4);
-	private static var lime_jni_create_method = Lib.load ("lime", "lime_jni_create_method", 5);
-	private static var lime_jni_get_env = Lib.load ("lime", "lime_jni_get_env", 0);
-	private static var lime_jni_call_member = Lib.load ("lime", "lime_jni_call_member", 3);
-	private static var lime_jni_call_static = Lib.load ("lime", "lime_jni_call_static", 2);
-	//private static var lime_jni_create_interface = Lib.load("lime", "lime_jni_create_interface", 3);
+	private static var openfl_legacy_jni_create_field = Lib.load ("openfl-legacy", "openfl_legacy_jni_create_field", 4);
+	private static var openfl_legacy_jni_create_method = Lib.load ("openfl-legacy", "openfl_legacy_jni_create_method", 5);
+	private static var openfl_legacy_jni_get_env = Lib.load ("openfl-legacy", "openfl_legacy_jni_get_env", 0);
+	private static var openfl_legacy_jni_call_member = Lib.load ("openfl-legacy", "openfl_legacy_jni_call_member", 3);
+	private static var openfl_legacy_jni_call_static = Lib.load ("openfl-legacy", "openfl_legacy_jni_call_static", 2);
+	//private static var openfl_legacy_jni_create_interface = Lib.load("lime", "openfl_legacy_jni_create_interface", 3);
 	
 }
 
@@ -210,14 +210,14 @@ class JNIMemberField {
 	
 	public function get (jobject:Dynamic):Dynamic {
 		
-		return lime_jni_get_member (field, jobject);
+		return openfl_legacy_jni_get_member (field, jobject);
 		
 	}
 	
 	
 	public function set (jobject:Dynamic, value:Dynamic):Dynamic {
 		
-		lime_jni_set_member (field, jobject, value);
+		openfl_legacy_jni_set_member (field, jobject, value);
 		return value;
 		
 	}
@@ -230,8 +230,8 @@ class JNIMemberField {
 	
 	
 	
-	private static var lime_jni_get_member = Lib.load ("lime", "lime_jni_get_member", 2);
-	private static var lime_jni_set_member = Lib.load ("lime", "lime_jni_set_member", 3);
+	private static var openfl_legacy_jni_get_member = Lib.load ("openfl-legacy", "openfl_legacy_jni_get_member", 2);
+	private static var openfl_legacy_jni_set_member = Lib.load ("openfl-legacy", "openfl_legacy_jni_set_member", 3);
 	
 	
 }
@@ -252,14 +252,14 @@ class JNIStaticField {
 	
 	public function get ():Dynamic {
 		
-		return lime_jni_get_static (field);
+		return openfl_legacy_jni_get_static (field);
 		
 	}
 	
 	
 	public function set (value:Dynamic):Dynamic {
 		
-		lime_jni_set_static (field, value);
+		openfl_legacy_jni_set_static (field, value);
 		return value;
 		
 	}
@@ -272,8 +272,8 @@ class JNIStaticField {
 	
 	
 	
-	private static var lime_jni_get_static = Lib.load ("lime", "lime_jni_get_static", 1);
-	private static var lime_jni_set_static = Lib.load ("lime", "lime_jni_set_static", 2);
+	private static var openfl_legacy_jni_get_static = Lib.load ("openfl-legacy", "openfl_legacy_jni_get_static", 1);
+	private static var openfl_legacy_jni_set_static = Lib.load ("openfl-legacy", "openfl_legacy_jni_set_static", 2);
 	
 	
 }
@@ -294,14 +294,14 @@ class JNIMethod {
 	public function callMember (args:Array<Dynamic>):Dynamic {
 		
 		var jobject = args.shift ();
-		return lime_jni_call_member (method, jobject, args);
+		return openfl_legacy_jni_call_member (method, jobject, args);
 		
 	}
 	
 	
 	public function callStatic (args:Array<Dynamic>):Dynamic {
 		
-		return lime_jni_call_static (method, args);
+		return openfl_legacy_jni_call_static (method, args);
 		
 	}
 	
@@ -343,8 +343,8 @@ class JNIMethod {
 	
 	
 	
-	private static var lime_jni_call_member = Lib.load ("lime", "lime_jni_call_member", 3);
-	private static var lime_jni_call_static = Lib.load ("lime", "lime_jni_call_static", 2);
+	private static var openfl_legacy_jni_call_member = Lib.load ("openfl-legacy", "openfl_legacy_jni_call_member", 3);
+	private static var openfl_legacy_jni_call_static = Lib.load ("openfl-legacy", "openfl_legacy_jni_call_static", 2);
 	
 	
 }

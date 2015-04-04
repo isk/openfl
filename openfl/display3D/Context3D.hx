@@ -11,13 +11,13 @@ import openfl.errors.Error;
 import openfl.events.Event;
 import openfl.geom.Matrix3D;
 import openfl.geom.Rectangle;
-import openfl.gl.GL;
-import openfl.gl.GLFramebuffer;
-import openfl.gl.GLUniformLocation;
-import openfl.gl.GLProgram;
-import openfl.gl.GLRenderbuffer;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLFramebuffer;
+import lime.graphics.opengl.GLUniformLocation;
+import lime.graphics.opengl.GLProgram;
+import lime.graphics.opengl.GLRenderbuffer;
 import openfl.utils.ByteArray;
-import openfl.utils.Float32Array;
+import lime.utils.Float32Array;
 import openfl.Lib;
 
 

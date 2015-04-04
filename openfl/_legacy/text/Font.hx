@@ -2,13 +2,12 @@ package openfl._legacy.text; #if openfl_legacy
 
 
 import haxe.Resource;
-import openfl._legacy.Assets;
 import openfl.display.Stage;
 import openfl.utils.ByteArray;
 import openfl.Lib;
 
 
-@:autoBuild(openfl._legacy.Assets.embedFont())
+@:autoBuild(openfl.Assets.embedFont())
 class Font {
 	
 	
@@ -63,7 +62,7 @@ class Font {
 				
 				__deviceFonts = new Array<Font> ();
 				var styles = [ FontStyle.BOLD, FontStyle.BOLD_ITALIC, FontStyle.ITALIC, FontStyle.REGULAR ];
-				lime_font_iterate_device_fonts (function (name, style) __deviceFonts.push (new Font (name, styles[style], FontType.DEVICE)));
+				openfl_legacy_font_iterate_device_fonts (function (name, style) __deviceFonts.push (new Font (name, styles[style], FontType.DEVICE)));
 				
 			}
 			
@@ -118,7 +117,7 @@ class Font {
 			
 			if (Reflect.hasField (font, "resourceName")) {
 				
-				lime_font_register_font (instance.fontName, ByteArray.fromBytes (Resource.getBytes (Reflect.field (font, "resourceName"))));
+				openfl_legacy_font_register_font (instance.fontName, ByteArray.fromBytes (Resource.getBytes (Reflect.field (font, "resourceName"))));
 				
 			}
 			
@@ -206,8 +205,8 @@ class Font {
 	
 	
 	private static var freetype_import_font = Lib.load ("lime", "freetype_import_font", 4);
-	private static var lime_font_register_font = Lib.load ("lime", "lime_font_register_font", 2);
-	private static var lime_font_iterate_device_fonts = Lib.load ("lime", "lime_font_iterate_device_fonts", 1);
+	private static var openfl_legacy_font_register_font = Lib.load ("openfl-legacy", "openfl_legacy_font_register_font", 2);
+	private static var openfl_legacy_font_iterate_device_fonts = Lib.load ("openfl-legacy", "openfl_legacy_font_iterate_device_fonts", 1);
 	
 	
 }

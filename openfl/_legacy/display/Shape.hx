@@ -6,7 +6,7 @@ class Shape extends DisplayObject {
 	
 	public function new () {
 		
-		super (DisplayObject.lime_create_display_object (), "Shape");
+		super (DisplayObject.openfl_legacy_create_display_object (), "Shape");
 		
 	}
 	

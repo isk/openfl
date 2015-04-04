@@ -41,7 +41,7 @@ class ManagedStage extends Stage {
 	
 	public function new (width:Int, height:Int, flags:Int = 0) {
 		
-		super (lime_managed_stage_create (width, height, flags), width, height);
+		super (openfl_legacy_managed_stage_create (width, height, flags), width, height);
 		
 	}
 	
@@ -62,7 +62,7 @@ class ManagedStage extends Stage {
 
 	public function pumpEvent (event:Dynamic):Void {
 		
-		lime_managed_stage_pump_event (__handle, event);
+		openfl_legacy_managed_stage_pump_event (__handle, event);
 		
 	}
 	
@@ -116,8 +116,8 @@ class ManagedStage extends Stage {
 	
 	
 	
-	private static var lime_managed_stage_create = Lib.load ("lime", "lime_managed_stage_create", 3);
-	private static var lime_managed_stage_pump_event = Lib.load ("lime", "lime_managed_stage_pump_event", 2);
+	private static var openfl_legacy_managed_stage_create = Lib.load ("openfl-legacy", "openfl_legacy_managed_stage_create", 3);
+	private static var openfl_legacy_managed_stage_pump_event = Lib.load ("openfl-legacy", "openfl_legacy_managed_stage_pump_event", 2);
 	
 	
 }

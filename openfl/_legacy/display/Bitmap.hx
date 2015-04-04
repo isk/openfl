@@ -15,7 +15,7 @@ class Bitmap extends DisplayObject {
 	
 	public function new (bitmapData:BitmapData = null, pixelSnapping:PixelSnapping = null, smoothing:Bool = false):Void {
 		
-		super (DisplayObject.lime_create_display_object (), "Bitmap");
+		super (DisplayObject.openfl_legacy_create_display_object (), "Bitmap");
 		
 		this.pixelSnapping = (pixelSnapping == null ? PixelSnapping.AUTO : pixelSnapping);
 		this.smoothing = smoothing;
@@ -72,7 +72,7 @@ class Bitmap extends DisplayObject {
 	
 	private function get_pixelSnapping ():PixelSnapping {
 		
-		var i:Int = lime_display_object_get_pixel_snapping (__handle);
+		var i:Int = openfl_legacy_display_object_get_pixel_snapping (__handle);
 		return Type.createEnumIndex (PixelSnapping, i);
 		
 	}
@@ -82,11 +82,11 @@ class Bitmap extends DisplayObject {
 		
 		if (value == null) {
 			
-			lime_display_object_set_pixel_snapping (__handle, 0);
+			openfl_legacy_display_object_set_pixel_snapping (__handle, 0);
 			
 		} else {
 			
-			lime_display_object_set_pixel_snapping (__handle, Type.enumIndex (value));
+			openfl_legacy_display_object_set_pixel_snapping (__handle, Type.enumIndex (value));
 			
 		}
 		
@@ -112,8 +112,8 @@ class Bitmap extends DisplayObject {
 	
 	
 	
-	private static var lime_display_object_get_pixel_snapping = Lib.load ("lime", "lime_display_object_get_pixel_snapping", 1);
-	private static var lime_display_object_set_pixel_snapping = Lib.load ("lime", "lime_display_object_set_pixel_snapping", 2);
+	private static var openfl_legacy_display_object_get_pixel_snapping = Lib.load ("openfl-legacy", "openfl_legacy_display_object_get_pixel_snapping", 1);
+	private static var openfl_legacy_display_object_set_pixel_snapping = Lib.load ("openfl-legacy", "openfl_legacy_display_object_set_pixel_snapping", 2);
 	
 	
 }

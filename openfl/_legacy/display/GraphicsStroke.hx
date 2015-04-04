@@ -26,12 +26,12 @@ class GraphicsStroke extends IGraphicsData {
 		this.scaleMode = scaleMode != null ? scaleMode : LineScaleMode.NORMAL;
 		this.thickness = thickness;
 		
-		super (lime_graphics_stroke_create (thickness, pixelHinting, scaleMode == null ? 0 : Type.enumIndex (scaleMode), caps == null ? 0 : Type.enumIndex (caps), joints == null ? 0 : Type.enumIndex (joints), miterLimit, fill == null ? null : fill.__handle));
+		super (openfl_legacy_graphics_stroke_create (thickness, pixelHinting, scaleMode == null ? 0 : Type.enumIndex (scaleMode), caps == null ? 0 : Type.enumIndex (caps), joints == null ? 0 : Type.enumIndex (joints), miterLimit, fill == null ? null : fill.__handle));
 		
 	}
 	
 	
-	private static var lime_graphics_stroke_create = Lib.load ("lime", "lime_graphics_stroke_create", -1);
+	private static var openfl_legacy_graphics_stroke_create = Lib.load ("openfl-legacy", "openfl_legacy_graphics_stroke_create", -1);
 	
 	
 }

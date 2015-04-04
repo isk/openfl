@@ -2,7 +2,6 @@ package openfl._legacy.display; #if openfl_legacy
 
 
 import openfl.geom.Matrix3D;
-import openfl.gl.GL;
 
 
 class OpenGLView extends DirectRenderer {

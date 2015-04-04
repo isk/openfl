@@ -1,13 +1,13 @@
 package openfl.display3D.textures; #if !flash
 
 
-import openfl.gl.GL;
-import openfl.gl.GLTexture;
-import openfl.gl.GLFramebuffer;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLTexture;
+import lime.graphics.opengl.GLFramebuffer;
 import openfl.geom.Rectangle;
-import openfl.utils.ArrayBuffer;
+import lime.utils.ArrayBuffer;
 import openfl.utils.ByteArray;
-import openfl.utils.UInt8Array;
+import lime.utils.UInt8Array;
 
 using openfl.display.BitmapData;
 

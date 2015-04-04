@@ -1,7 +1,7 @@
 package openfl.display3D; #if !flash
 
 
-import openfl.gl.GL;
+import lime.graphics.opengl.GL;
 
 
 abstract Context3DCompareMode(Int) {

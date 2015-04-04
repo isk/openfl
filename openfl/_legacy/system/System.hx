@@ -40,7 +40,7 @@ class System {
 	
 	
 	
-	private static function get_deviceID ():String { return lime_get_unique_device_identifier (); }
+	private static function get_deviceID ():String { return openfl_legacy_get_unique_device_identifier (); }
 	
 	
 	private static function get_totalMemory ():Int {
@@ -65,7 +65,7 @@ class System {
 	
 	
 	
-	private static var lime_get_unique_device_identifier = Lib.load ("lime", "lime_get_unique_device_identifier", 0);
+	private static var openfl_legacy_get_unique_device_identifier = Lib.load ("openfl-legacy", "openfl_legacy_get_unique_device_identifier", 0);
 	
 	
 }

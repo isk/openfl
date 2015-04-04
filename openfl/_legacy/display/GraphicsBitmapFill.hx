@@ -21,12 +21,12 @@ class GraphicsBitmapFill extends IGraphicsData implements IGraphicsFill {
 		this.repeat = repeat;
 		this.smooth = smooth;
 		
-		super (lime_graphics_solid_fill_create (0, 1));
+		super (openfl_legacy_graphics_solid_fill_create (0, 1));
 		
 	}
 	
 	
-	private static var lime_graphics_solid_fill_create = Lib.load ("lime", "lime_graphics_solid_fill_create", 2);
+	private static var openfl_legacy_graphics_solid_fill_create = Lib.load ("openfl-legacy", "openfl_legacy_graphics_solid_fill_create", 2);
 	
 	
 }

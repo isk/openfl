@@ -9,7 +9,7 @@ import openfl.display3D.Context3DProgramType;
 import openfl.utils.ByteArray;
 
 #if (cpp || neko || js)
-import openfl.gl.GL;
+import lime.graphics.opengl.GL;
 #end
 
 

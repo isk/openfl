@@ -39,7 +39,7 @@ class SharedObject extends EventDispatcher {
 		
 		#if (iphone || android || tizen)
 		
-		untyped lime_clear_user_preference (name);
+		untyped openfl_legacy_clear_user_preference (name);
 		
 		#else
 		
@@ -126,7 +126,7 @@ class SharedObject extends EventDispatcher {
 		
 		#if (iphone || android || tizen)
 		
-		untyped lime_set_user_preference (name, encodedData);
+		untyped openfl_legacy_set_user_preference (name, encodedData);
 		
 		#else
 		
@@ -169,7 +169,7 @@ class SharedObject extends EventDispatcher {
 		
 		#if (iphone || android || tizen)
 		
-		var rawData:String = untyped lime_get_user_preference (name);
+		var rawData:String = untyped openfl_legacy_get_user_preference (name);
 		
 		#else
 		
@@ -282,9 +282,9 @@ class SharedObject extends EventDispatcher {
 	
 	
 	#if (iphone || android || tizen)
-	private static var lime_get_user_preference = Lib.load ("lime", "lime_get_user_preference", 1);
-	private static var lime_set_user_preference = Lib.load ("lime", "lime_set_user_preference", 2);
-	private static var lime_clear_user_preference = Lib.load ("lime", "lime_clear_user_preference", 1);
+	private static var openfl_legacy_get_user_preference = Lib.load ("openfl-legacy", "openfl_legacy_get_user_preference", 1);
+	private static var openfl_legacy_set_user_preference = Lib.load ("openfl-legacy", "openfl_legacy_set_user_preference", 2);
+	private static var openfl_legacy_clear_user_preference = Lib.load ("openfl-legacy", "openfl_legacy_clear_user_preference", 1);
 	#end
 	
 	

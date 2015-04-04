@@ -90,7 +90,7 @@ class Capabilities {
 	
 	private static function get_language ():String {
 		
-		var locale:String = lime_capabilities_get_language ();
+		var locale:String = openfl_legacy_capabilities_get_language ();
 		
 		if (locale == null || locale == "" || locale == "C" || locale == "POSIX") {
 			
@@ -134,13 +134,13 @@ class Capabilities {
 	}
 	
 	
-	private static function get_pixelAspectRatio ():Float { return lime_capabilities_get_pixel_aspect_ratio (); }
-	private static function get_screenDPI ():Float { return lime_capabilities_get_screen_dpi (); }
+	private static function get_pixelAspectRatio ():Float { return openfl_legacy_capabilities_get_pixel_aspect_ratio (); }
+	private static function get_screenDPI ():Float { return openfl_legacy_capabilities_get_screen_dpi (); }
 	
 	
 	private static function get_screenResolutions ():Array<Array<Int>> {
 		
-		var res:Array<Int> = lime_capabilities_get_screen_resolutions ();
+		var res:Array<Int> = openfl_legacy_capabilities_get_screen_resolutions ();
 		
 		if (res == null) {
 			
@@ -161,11 +161,11 @@ class Capabilities {
 	}
 	
 	
-	private static function get_screenResolutionX ():Float { return lime_capabilities_get_screen_resolution_x (); }
-	private static function get_screenResolutionY ():Float { return lime_capabilities_get_screen_resolution_y (); }
+	private static function get_screenResolutionX ():Float { return openfl_legacy_capabilities_get_screen_resolution_x (); }
+	private static function get_screenResolutionY ():Float { return openfl_legacy_capabilities_get_screen_resolution_y (); }
 	
 	private static function get_screenModes ():Array<ScreenMode> {
-		var modes:Array<Int> = lime_capabilities_get_screen_modes ();
+		var modes:Array<Int> = openfl_legacy_capabilities_get_screen_modes ();
 		var out = new Array<ScreenMode> ();
 
 		if (modes == null) {
@@ -221,13 +221,13 @@ class Capabilities {
 	
 	
 	
-	private static var lime_capabilities_get_pixel_aspect_ratio = Lib.load ("lime", "lime_capabilities_get_pixel_aspect_ratio", 0);
-	private static var lime_capabilities_get_screen_dpi = Lib.load ("lime", "lime_capabilities_get_screen_dpi", 0);
-	private static var lime_capabilities_get_screen_resolution_x = Lib.load ("lime", "lime_capabilities_get_screen_resolution_x", 0);
-	private static var lime_capabilities_get_screen_resolution_y = Lib.load ("lime", "lime_capabilities_get_screen_resolution_y", 0);
-	private static var lime_capabilities_get_screen_resolutions = Lib.load ("lime", "lime_capabilities_get_screen_resolutions", 0 );
-	private static var lime_capabilities_get_screen_modes = Lib.load ("lime", "lime_capabilities_get_screen_modes", 0 );
-	private static var lime_capabilities_get_language = Lib.load ("lime", "lime_capabilities_get_language", 0);
+	private static var openfl_legacy_capabilities_get_pixel_aspect_ratio = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_pixel_aspect_ratio", 0);
+	private static var openfl_legacy_capabilities_get_screen_dpi = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_screen_dpi", 0);
+	private static var openfl_legacy_capabilities_get_screen_resolution_x = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_screen_resolution_x", 0);
+	private static var openfl_legacy_capabilities_get_screen_resolution_y = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_screen_resolution_y", 0);
+	private static var openfl_legacy_capabilities_get_screen_resolutions = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_screen_resolutions", 0 );
+	private static var openfl_legacy_capabilities_get_screen_modes = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_screen_modes", 0 );
+	private static var openfl_legacy_capabilities_get_language = Lib.load ("openfl-legacy", "openfl_legacy_capabilities_get_language", 0);
 	
 	
 }

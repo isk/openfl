@@ -1,9 +1,9 @@
 package openfl.display3D.textures; #if !flash
 
 
-import openfl.gl.GL;
-import openfl.gl.GLTexture;
-import openfl.gl.GLFramebuffer;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLTexture;
+import lime.graphics.opengl.GLFramebuffer;
 import openfl.events.EventDispatcher;
 
 

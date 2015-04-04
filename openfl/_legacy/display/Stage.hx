@@ -4,6 +4,13 @@ package openfl._legacy.display; #if openfl_legacy
 import haxe.io.Bytes;
 import haxe.CallStack;
 import haxe.Timer;
+import lime.app.IModule;
+import lime.graphics.RenderContext;
+import lime.ui.Gamepad;
+import lime.ui.GamepadAxis;
+import lime.ui.GamepadButton;
+import lime.ui.KeyCode;
+import lime.ui.KeyModifier;
 import openfl.display.DisplayObjectContainer;
 import openfl.display.OpenGLView;
 import openfl.display.Stage3D;
@@ -21,9 +28,9 @@ import openfl.events.UncaughtErrorEvent;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 import openfl.media.SoundChannel;
-import openfl.net.URLLoader;
-import openfl._legacy.gl.GL;
-import openfl._legacy.gl.GLFramebuffer;
+//import openfl.net.URLLoader;
+import lime.graphics.opengl.GL;
+import lime.graphics.opengl.GLFramebuffer;
 import openfl._legacy.system.ScreenMode;
 import openfl.ui.Keyboard;
 import openfl.Lib;
@@ -33,10 +40,10 @@ import openfl.Vector;
 import openfl._legacy.utils.JNI;
 #end
 
-@:access(openfl._legacy.gl.GL)
+@:access(lime.graphics.opengl.GL)
 
 
-class Stage extends DisplayObjectContainer {
+class Stage extends DisplayObjectContainer implements IModule {
 	
 	
 	@:noCompletion public static var __earlyWakeup = 0.005;
@@ -108,7 +115,40 @@ class Stage extends DisplayObjectContainer {
 	@:noCompletion private var __touchInfo:Map <Int, TouchInfo>;
 	
 	
-	public function new (handle:Dynamic, width:Int, height:Int) {
+	static inline public var etUnknown = 0;
+	static inline public var etKeyDown = 1;
+	static inline public var etChar = 2;
+	static inline public var etKeyUp = 3;
+	static inline public var etMouseMove = 4;
+	static inline public var etMouseDown = 5;
+	static inline public var etMouseClick = 6;
+	static inline public var etMouseUp = 7;
+	static inline public var etResize = 8;
+	static inline public var etPoll = 9;
+	static inline public var etQuit = 10;
+	static inline public var etFocus = 11;
+	static inline public var etShouldRotate = 12;
+	static inline public var etDestroyHandler = 13;
+	static inline public var etRedraw = 14;
+	static inline public var etTouchBegin = 15;
+	static inline public var etTouchMove = 16;
+	static inline public var etTouchEnd = 17;
+	static inline public var etTouchTap = 18;
+	static inline public var etChange = 19;
+	//static inline public var efLeftDown = 0x0001;
+	//static inline public var efShiftDown = 0x0002;
+	//static inline public var efCtrlDown = 0x0004;
+	//static inline public var efAltDown = 0x0008;
+	//static inline public var efCommandDown = 0x0010;
+	static inline public var efMiddleDown = 0x0020;
+	static inline public var efRightDown = 0x0040;
+	//static inline public var efLocationRight = 0x4000;
+	static inline public var efPrimaryTouch = 0x8000;
+	
+	
+	public function new (width:Int, height:Int, color:Int) {
+		
+		var handle = openfl_legacy_managed_stage_create (width, height, 0x00000080);
 		
 		super (handle, "Stage");
 		
@@ -120,7 +160,7 @@ class Stage extends DisplayObjectContainer {
 		
 		#if android
 		__hatValue = 0;
-		renderRequest = lime_stage_request_render;
+		renderRequest = openfl_legacy_stage_request_render;
 		#else
 		renderRequest = null;
 		#end
@@ -129,7 +169,7 @@ class Stage extends DisplayObjectContainer {
 		GL.defaultFramebuffer = new GLFramebuffer (GL.getParameter (GL.FRAMEBUFFER_BINDING), GL.version);
 		#end
 		
-		lime_set_stage_handler (__handle, __processStageEvent, width, height);
+		openfl_legacy_set_stage_handler (__handle, __processStageEvent, width, height);
 		__invalid = false;
 		__lastRender = 0;
 		__lastDown = [];
@@ -145,19 +185,48 @@ class Stage extends DisplayObjectContainer {
 		#if(cpp && (safeMode || debug))
  		untyped __global__.__hxcpp_set_critical_error_handler( function(message:String) { throw message; } );
  		#end
+		
+		openfl_legacy_managed_stage_pump_event (handle, { type: etResize, x: width, y: height });
+		
+		opaqueBackground = color;
 	}
 	
 	
 	public static dynamic function getOrientation ():Int {
 		
-		return lime_stage_get_orientation ();
+		return 0;
+		//return openfl_legacy_stage_get_orientation ();
 		
 	}
 	
 	
 	public static dynamic function getNormalOrientation ():Int {
 		
-		return lime_stage_get_normal_orientation ();
+		return 0;
+		//return openfl_legacy_stage_get_normal_orientation ();
+		
+	}
+	
+	
+	public function init (context:RenderContext):Void {
+		
+		/*switch (context) {
+			
+			case OPENGL (gl):
+				
+				__renderer = new GLRenderer (stageWidth, stageHeight, gl);
+			
+			case CANVAS (context):
+				
+				__renderer = new CanvasRenderer (stageWidth, stageHeight, context);
+			
+			case DOM (element):
+				
+				__renderer = new DOMRenderer (stageWidth, stageHeight, element);
+			
+			default:
+			
+		}*/
 		
 	}
 	
@@ -169,32 +238,289 @@ class Stage extends DisplayObjectContainer {
 	}
 	
 	
+	public function onGamepadAxisMove (gamepad:Gamepad, axis:GamepadAxis, value:Float):Void {
+		
+		
+		
+	}
+	
+	
+	public function onGamepadButtonDown (gamepad:Gamepad, button:GamepadButton):Void {
+		
+		
+		
+	}
+	
+	
+	public function onGamepadButtonUp (gamepad:Gamepad, button:GamepadButton):Void {
+		
+		
+		
+	}
+	
+	
+	public function onGamepadConnect (gamepad:Gamepad):Void {
+		
+		
+		
+	}
+	
+	
+	public function onGamepadDisconnect (gamepad:Gamepad):Void {
+		
+		
+		
+	}
+	
+	
+	public function onKeyDown (keyCode:KeyCode, modifier:KeyModifier):Void {
+		
+		//__onKey (KeyboardEvent.KEY_DOWN, keyCode, modifier);
+		
+	}
+	
+	
+	public function onKeyUp (keyCode:KeyCode, modifier:KeyModifier):Void {
+		
+		//__onKey (KeyboardEvent.KEY_UP, keyCode, modifier);
+		
+	}
+	
+	
+	public function onMouseDown (x:Float, y:Float, button:Int):Void {
+		
+		/*var type = switch (button) {
+			
+			case 1: MouseEvent.MIDDLE_MOUSE_DOWN;
+			case 2: MouseEvent.RIGHT_MOUSE_DOWN;
+			default: MouseEvent.MOUSE_DOWN;
+			
+		}
+		
+		__onMouse (type, x, y, button);*/
+		
+	}
+	
+	
+	public function onMouseMove (x:Float, y:Float):Void {
+		
+		//__onMouse (MouseEvent.MOUSE_MOVE, x, y, 0);
+		
+	}
+	
+	
+	public function onMouseMoveRelative (x:Float, y:Float):Void {
+		
+		
+		
+	}
+	
+	
+	public function onMouseUp (x:Float, y:Float, button:Int):Void {
+		
+		/*var type = switch (button) {
+			
+			case 1: MouseEvent.MIDDLE_MOUSE_UP;
+			case 2: MouseEvent.RIGHT_MOUSE_UP;
+			default: MouseEvent.MOUSE_UP;
+			
+		}
+		
+		__onMouse (type, x, y, button);*/
+		
+	}
+	
+	
+	public function onMouseWheel (deltaX:Float, deltaY:Float):Void {
+		
+		//__onMouseWheel (deltaX, deltaY);
+		
+	}
+	
+	
+	public function onRenderContextLost ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onRenderContextRestored (context:RenderContext):Void {
+		
+		
+		
+	}
+	
+	
+	public function onTouchMove (x:Float, y:Float, id:Int):Void {
+		
+		//__onTouch (TouchEvent.TOUCH_MOVE, x, y, id);
+		
+	}
+	
+	
+	public function onTouchEnd (x:Float, y:Float, id:Int):Void {
+		
+		//__onTouch (TouchEvent.TOUCH_END, x, y, id);
+		
+	}
+	
+	
+	public function onTouchStart (x:Float, y:Float, id:Int):Void {
+		
+		//__onTouch (TouchEvent.TOUCH_BEGIN, x, y, id);
+		
+	}
+	
+	
+	public function onWindowActivate ():Void {
+		
+		//var event = new Event (Event.ACTIVATE);
+		//__broadcast (event, true);
+		
+	}
+	
+	
+	public function onWindowClose ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowDeactivate ():Void {
+		
+		//var event = new Event (Event.DEACTIVATE);
+		//__broadcast (event, true);
+		
+	}
+	
+	
+	public function onWindowFocusIn ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowFocusOut ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowFullscreen ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowMinimize ():Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowMove (x:Float, y:Float):Void {
+		
+		
+		
+	}
+	
+	
+	public function onWindowResize (width:Int, height:Int):Void {
+		
+		openfl_legacy_managed_stage_pump_event (__handle, { type: etResize, x: width, y: height });
+		
+		
+		/*stageWidth = width;
+		stageHeight = height;
+		
+		if (__renderer != null) {
+			
+			__renderer.resize (width, height);
+			
+		}
+		
+		var event = new Event (Event.RESIZE);
+		__broadcast (event, false);*/
+		
+	}
+	
+	
+	public function onWindowRestore ():Void {
+		
+		
+		
+	}
+	
+	
+	public function render (context:RenderContext):Void {
+		
+		__render (true);
+		
+		/*if (__rendering) return;
+		__rendering = true;
+		
+		__broadcast (new Event (Event.ENTER_FRAME), true);
+		
+		if (__invalidated) {
+			
+			__invalidated = false;
+			__broadcast (new Event (Event.RENDER), true);
+			
+		}
+		
+		__renderable = true;
+		__update (false, true);
+		
+		if (__renderer != null) {
+			
+			__renderer.render (this);
+			
+		}
+		
+		__rendering = false;*/
+		
+	}
+	
+	
+	public function update (deltaTime:Int):Void {
+		
+		
+		
+	}
+	
+	
 	public function resize (width:Int, height:Int):Void {
 		
-		lime_stage_resize_window (__handle, width, height);
+		//openfl_legacy_stage_resize_window (__handle, width, height);
 		
 	}
 	
 	
 	public function setResolution (width:Int, height:Int):Void {
-		lime_stage_set_resolution(__handle, width, height);
+		//openfl_legacy_stage_set_resolution(__handle, width, height);
 	}
 	
 	
 	public function setScreenMode (mode:ScreenMode):Void {
-		lime_stage_set_screenmode(__handle, mode.width, mode.height, mode.refreshRate, 0);
+		//openfl_legacy_stage_set_screenmode(__handle, mode.width, mode.height, mode.refreshRate, 0);
 	}
 	
 	
 	public function setFullscreen (full:Bool):Void {
-		lime_stage_set_fullscreen(__handle, full);
+		//openfl_legacy_stage_set_fullscreen(__handle, full);
 	}
 	
 	
 	public static function setFixedOrientation (orientation:Int):Void {
 		
 		// If you set this, you don't need to set the 'shouldRotateInterface' function.
-		lime_stage_set_fixed_orientation (orientation);
+		openfl_legacy_stage_set_fixed_orientation (orientation);
 		
 	}
 	
@@ -208,7 +534,7 @@ class Stage extends DisplayObjectContainer {
 	
 	public function showCursor (show:Bool):Void {
 		
-		lime_stage_show_cursor (__handle, show);
+		//openfl_legacy_stage_show_cursor (__handle, show);
 		
 	}
 	
@@ -411,7 +737,7 @@ class Stage extends DisplayObjectContainer {
 				
 				case 9: // etPoll
 					
-					__pollTimers ();
+					//__pollTimers ();
 				
 				case 10: // etQuit
 					
@@ -1050,8 +1376,8 @@ class Stage extends DisplayObjectContainer {
 		#if !java
 		Timer.__checkTimers ();
 		#end
-		SoundChannel.__pollComplete ();
-		URLLoader.__pollData ();
+		//SoundChannel.__pollComplete ();
+		//URLLoader.__pollData ();
 		__checkRender ();
 		
 	}
@@ -1078,7 +1404,7 @@ class Stage extends DisplayObjectContainer {
 			
 		}
 		
-		lime_render_stage (__handle);
+		openfl_legacy_render_stage (__handle);
 		
 	}
 	
@@ -1176,25 +1502,27 @@ class Stage extends DisplayObjectContainer {
 	
 	@:noCompletion public function __updateNextWake ():Float {
 		
+		return 0;
+		
 		#if java
 		return 0;
 		#else
 		var nextWake = Timer.__nextWake (315000000.0);
 		
-		if (nextWake > 0.001 && SoundChannel.__dynamicSoundCount > 0) {
+		/*if (nextWake > 0.001 && SoundChannel.__dynamicSoundCount > 0) {
 			
 			nextWake = 0.001;
 			
-		}
+		}*/
 		
-		if (nextWake > 0.02 && (SoundChannel.__completePending () || URLLoader.__loadPending ())) {
+		/*if (nextWake > 0.02 && (SoundChannel.__completePending () || URLLoader.__loadPending ())) {
 			
 			nextWake = (active || !pauseWhenDeactivated) ? 0.020 : 0.500;
 			
-		}
+		}*/
 		
 		nextWake = __nextFrameDue (nextWake);
-		lime_stage_set_next_wake (__handle, nextWake);
+		//openfl_legacy_stage_set_next_wake (__handle, nextWake);
 		return nextWake;
 		#end
 		
@@ -1210,7 +1538,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_align ():StageAlign {
 		
-		var i:Int = lime_stage_get_align (__handle);
+		var i:Int = openfl_legacy_stage_get_align (__handle);
 		return Type.createEnumIndex (StageAlign, i);
 		
 	}
@@ -1218,7 +1546,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function set_align (value:StageAlign):StageAlign {
 		
-		lime_stage_set_align (__handle, Type.enumIndex (value));
+		openfl_legacy_stage_set_align (__handle, Type.enumIndex (value));
 		return value;
 		
 	}
@@ -1240,7 +1568,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_displayState ():StageDisplayState {
 		
-		var i:Int = lime_stage_get_display_state (__handle);
+		var i:Int = openfl_legacy_stage_get_display_state (__handle);
 		return Type.createEnumIndex (StageDisplayState, i);
 		
 	}
@@ -1248,7 +1576,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function set_displayState (value:StageDisplayState):StageDisplayState {
 		
-		lime_stage_set_display_state (__handle, Type.enumIndex (value));
+		openfl_legacy_stage_set_display_state (__handle, Type.enumIndex (value));
 		return value;
 		
 	}
@@ -1256,16 +1584,18 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_dpiScale ():Float {
 		
-		return lime_stage_get_dpi_scale (__handle);
+		return 1;
+		//return openfl_legacy_stage_get_dpi_scale (__handle);
 		
 	}
 	
 	
 	private function get_focus ():InteractiveObject {
 		
-		var id = lime_stage_get_focus_id (__handle);
-		var object = __findByID (id);
-		return cast object;
+		return null;
+		//var id = openfl_legacy_stage_get_focus_id (__handle);
+		//var object = __findByID (id);
+		//return cast object;
 		
 	}
 	
@@ -1274,11 +1604,11 @@ class Stage extends DisplayObjectContainer {
 		
 		if (value == null) {
 			
-			lime_stage_set_focus (__handle, null, 0);
+			//openfl_legacy_stage_set_focus (__handle, null, 0);
 			
 		} else {
 			
-			lime_stage_set_focus (__handle, value.__handle, 0);
+			//openfl_legacy_stage_set_focus (__handle, value.__handle, 0);
 			
 		}
 		
@@ -1299,14 +1629,15 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_isOpenGL ():Bool {
 		
-		return lime_stage_is_opengl (__handle);
+		return true;
+		//return openfl_legacy_stage_is_opengl (__handle);
 		
 	}
 	
 	
 	private function get_quality ():StageQuality {
 		
-		var i:Int = lime_stage_get_quality (__handle);
+		var i:Int = openfl_legacy_stage_get_quality (__handle);
 		return Type.createEnumIndex (StageQuality, i);
 		
 	}
@@ -1314,7 +1645,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function set_quality (value:StageQuality):StageQuality {
 		
-		lime_stage_set_quality (__handle, Type.enumIndex (value));
+		openfl_legacy_stage_set_quality (__handle, Type.enumIndex (value));
 		return value;
 		
 	}
@@ -1322,7 +1653,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_scaleMode ():StageScaleMode {
 		
-		var i:Int = lime_stage_get_scale_mode (__handle);
+		var i:Int = openfl_legacy_stage_get_scale_mode (__handle);
 		return Type.createEnumIndex (StageScaleMode, i);
 		
 	}
@@ -1330,7 +1661,7 @@ class Stage extends DisplayObjectContainer {
 	
 	private function set_scaleMode (value:StageScaleMode):StageScaleMode {
 		
-		lime_stage_set_scale_mode (__handle, Type.enumIndex (value));
+		openfl_legacy_stage_set_scale_mode (__handle, Type.enumIndex (value));
 		return value;
 		
 	}
@@ -1345,7 +1676,7 @@ class Stage extends DisplayObjectContainer {
 		}
 		
 		#if (ios || android)
-		var height = #if android lime_get_softkeyboardheight (); #else lime_stage_get_keyboard_height (__handle); #end
+		var height = #if android openfl_legacy_get_softkeyboardheight (); #else openfl_legacy_stage_get_keyboard_height (__handle); #end
 		
 		if (height > 0) {
 			
@@ -1376,19 +1707,19 @@ class Stage extends DisplayObjectContainer {
 	}
 	
 	
-	private function get_stageFocusRect ():Bool { return lime_stage_get_focus_rect (__handle); }
+	private function get_stageFocusRect ():Bool { return openfl_legacy_stage_get_focus_rect (__handle); }
 	private function set_stageFocusRect (value:Bool):Bool {
 		
-		lime_stage_set_focus_rect (__handle, value);
+		openfl_legacy_stage_set_focus_rect (__handle, value);
 		return value;
 		
 	}
 
 
-	private function get_autos3d ():Bool { return lime_stage_get_autos3d (__handle); }
+	private function get_autos3d ():Bool { return openfl_legacy_stage_get_autos3d (__handle); }
 	private function set_autos3d (value:Bool):Bool {
 		
-		lime_stage_set_autos3d (__handle, value);
+		openfl_legacy_stage_set_autos3d (__handle, value);
 		return value;
 		
 	}
@@ -1396,14 +1727,14 @@ class Stage extends DisplayObjectContainer {
 	
 	private function get_stageHeight ():Int {
 		
-		return Std.int (cast (lime_stage_get_stage_height (__handle), Float));
+		return Std.int (cast (openfl_legacy_stage_get_stage_height (__handle), Float));
 		
 	}
 	
 	
 	private function get_stageWidth ():Int {
 		
-		return Std.int (cast (lime_stage_get_stage_width (__handle), Float));
+		return Std.int (cast (openfl_legacy_stage_get_stage_width (__handle), Float));
 		
 	}
 	
@@ -1415,42 +1746,45 @@ class Stage extends DisplayObjectContainer {
 	
 	
 	
-	private static var lime_set_stage_handler = Lib.load ("lime", "lime_set_stage_handler", 4);
-	private static var lime_render_stage = Lib.load ("lime", "lime_render_stage", 1);
-	private static var lime_stage_get_autos3d = Lib.load ("lime", "lime_stage_get_autos3d", 1);
-	private static var lime_stage_set_autos3d = Lib.load ("lime", "lime_stage_set_autos3d", 2);
-	private static var lime_stage_get_focus_id = Lib.load ("lime", "lime_stage_get_focus_id", 1);
-	private static var lime_stage_set_focus = Lib.load ("lime", "lime_stage_set_focus", 3);
-	private static var lime_stage_get_focus_rect = Lib.load ("lime", "lime_stage_get_focus_rect", 1);
-	private static var lime_stage_set_focus_rect = Lib.load ("lime", "lime_stage_set_focus_rect", 2);
-	private static var lime_stage_is_opengl = Lib.load ("lime", "lime_stage_is_opengl", 1);
+	private static var openfl_legacy_set_stage_handler = Lib.load ("openfl-legacy", "openfl_legacy_set_stage_handler", 4);
+	private static var openfl_legacy_render_stage = Lib.load ("openfl-legacy", "openfl_legacy_render_stage", 1);
+	private static var openfl_legacy_stage_get_autos3d = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_autos3d", 1);
+	private static var openfl_legacy_stage_set_autos3d = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_autos3d", 2);
+	//private static var openfl_legacy_stage_get_focus_id = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_focus_id", 1);
+	//private static var openfl_legacy_stage_set_focus = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_focus", 3);
+	private static var openfl_legacy_stage_get_focus_rect = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_focus_rect", 1);
+	private static var openfl_legacy_stage_set_focus_rect = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_focus_rect", 2);
+	//private static var openfl_legacy_stage_is_opengl = Lib.load ("openfl-legacy", "openfl_legacy_stage_is_opengl", 1);
 	#if ios
-	private static var lime_stage_get_keyboard_height = Lib.load ("lime", "lime_stage_get_keyboard_height", 1);
+	private static var openfl_legacy_stage_get_keyboard_height = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_keyboard_height", 1);
 	#end
-	private static var lime_stage_get_stage_width = Lib.load ("lime", "lime_stage_get_stage_width", 1);
-	private static var lime_stage_get_stage_height = Lib.load ("lime", "lime_stage_get_stage_height", 1);
-	private static var lime_stage_get_dpi_scale = Lib.load ("lime", "lime_stage_get_dpi_scale", 1);
-	private static var lime_stage_get_scale_mode = Lib.load ("lime", "lime_stage_get_scale_mode", 1);
-	private static var lime_stage_set_scale_mode = Lib.load ("lime", "lime_stage_set_scale_mode", 2);
-	private static var lime_stage_get_align = Lib.load ("lime", "lime_stage_get_align", 1);
-	private static var lime_stage_set_align = Lib.load ("lime", "lime_stage_set_align", 2);
-	private static var lime_stage_get_quality = Lib.load ("lime", "lime_stage_get_quality", 1);
-	private static var lime_stage_set_quality = Lib.load ("lime", "lime_stage_set_quality", 2);
-	private static var lime_stage_get_display_state = Lib.load ("lime", "lime_stage_get_display_state", 1);
-	private static var lime_stage_set_display_state = Lib.load ("lime", "lime_stage_set_display_state", 2);
-	private static var lime_stage_set_next_wake = Lib.load ("lime", "lime_stage_set_next_wake", 2);
-	private static var lime_stage_request_render = Lib.load ("lime", "lime_stage_request_render", 0);
-	private static var lime_stage_resize_window = Lib.load ("lime", "lime_stage_resize_window", 3);
-	private static var lime_stage_set_resolution = Lib.load ("lime", "lime_stage_set_resolution", 3);
-	private static var lime_stage_set_screenmode = Lib.load("lime","lime_stage_set_screenmode", 5);
-	private static var lime_stage_set_fullscreen = Lib.load ("lime", "lime_stage_set_fullscreen", 2);
-	private static var lime_stage_show_cursor = Lib.load ("lime", "lime_stage_show_cursor", 2);
-	private static var lime_stage_set_fixed_orientation = Lib.load ("lime", "lime_stage_set_fixed_orientation", 1);
-	private static var lime_stage_get_orientation = Lib.load ("lime", "lime_stage_get_orientation", 0);
-	private static var lime_stage_get_normal_orientation = Lib.load ("lime", "lime_stage_get_normal_orientation", 0);
+	private static var openfl_legacy_stage_get_stage_width = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_stage_width", 1);
+	private static var openfl_legacy_stage_get_stage_height = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_stage_height", 1);
+	//private static var openfl_legacy_stage_get_dpi_scale = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_dpi_scale", 1);
+	private static var openfl_legacy_stage_get_scale_mode = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_scale_mode", 1);
+	private static var openfl_legacy_stage_set_scale_mode = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_scale_mode", 2);
+	private static var openfl_legacy_stage_get_align = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_align", 1);
+	private static var openfl_legacy_stage_set_align = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_align", 2);
+	private static var openfl_legacy_stage_get_quality = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_quality", 1);
+	private static var openfl_legacy_stage_set_quality = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_quality", 2);
+	private static var openfl_legacy_stage_get_display_state = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_display_state", 1);
+	private static var openfl_legacy_stage_set_display_state = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_display_state", 2);
+	//private static var openfl_legacy_stage_set_next_wake = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_next_wake", 2);
+	private static var openfl_legacy_stage_request_render = Lib.load ("openfl-legacy", "openfl_legacy_stage_request_render", 0);
+	//private static var openfl_legacy_stage_resize_window = Lib.load ("openfl-legacy", "openfl_legacy_stage_resize_window", 3);
+	//private static var openfl_legacy_stage_set_resolution = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_resolution", 3);
+	//private static var openfl_legacy_stage_set_screenmode = Lib.load("lime","openfl_legacy_stage_set_screenmode", 5);
+	//private static var openfl_legacy_stage_set_fullscreen = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_fullscreen", 2);
+	//private static var openfl_legacy_stage_show_cursor = Lib.load ("openfl-legacy", "openfl_legacy_stage_show_cursor", 2);
+	private static var openfl_legacy_stage_set_fixed_orientation = Lib.load ("openfl-legacy", "openfl_legacy_stage_set_fixed_orientation", 1);
+	//private static var openfl_legacy_stage_get_orientation = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_orientation", 0);
+	//private static var openfl_legacy_stage_get_normal_orientation = Lib.load ("openfl-legacy", "openfl_legacy_stage_get_normal_orientation", 0);
+	private static var openfl_legacy_managed_stage_create = Lib.load ("openfl-legacy", "openfl_legacy_managed_stage_create", 3);
+	private static var openfl_legacy_managed_stage_pump_event:Dynamic = Lib.load ("openfl-legacy", "openfl_legacy_managed_stage_pump_event", 2);
+	
 	
 	#if android
-	private static var lime_get_softkeyboardheight = JNI.createStaticMethod ("org.haxe.lime.GameActivity", "getSoftKeyboardHeight", "()F");
+	private static var openfl_legacy_get_softkeyboardheight = JNI.createStaticMethod ("org.haxe.lime.GameActivity", "getSoftKeyboardHeight", "()F");
 	#end
 	
 	

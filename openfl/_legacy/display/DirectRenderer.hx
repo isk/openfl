@@ -12,7 +12,7 @@ class DirectRenderer extends DisplayObject {
 	
 	public function new (type:String = "DirectRenderer") {
 		
-		super (lime_direct_renderer_create (), type);
+		super (openfl_legacy_direct_renderer_create (), type);
 		
 		addEventListener (Event.ADDED_TO_STAGE, __stage_onAddedToStage);
 		addEventListener (Event.REMOVED_FROM_STAGE, __stage_onRemovedFromStage);
@@ -51,14 +51,14 @@ class DirectRenderer extends DisplayObject {
 	
 	@:noCompletion private function __stage_onAddedToStage (event:Event):Void {
 		
-		lime_direct_renderer_set (__handle, __onRender);
+		openfl_legacy_direct_renderer_set (__handle, __onRender);
 		
 	}
 	
 	
 	@:noCompletion private function __stage_onRemovedFromStage (event:Event):Void {
 		
-		lime_direct_renderer_set (__handle, null);
+		openfl_legacy_direct_renderer_set (__handle, null);
 		
 	}
 	
@@ -70,8 +70,8 @@ class DirectRenderer extends DisplayObject {
 	
 	
 	
-	private static var lime_direct_renderer_create = Lib.load ("lime", "lime_direct_renderer_create", 0);
-	private static var lime_direct_renderer_set = Lib.load ("lime", "lime_direct_renderer_set", 2);
+	private static var openfl_legacy_direct_renderer_create = Lib.load ("openfl-legacy", "openfl_legacy_direct_renderer_create", 0);
+	private static var openfl_legacy_direct_renderer_set = Lib.load ("openfl-legacy", "openfl_legacy_direct_renderer_set", 2);
 	
 	
 }

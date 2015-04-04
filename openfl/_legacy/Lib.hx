@@ -1,6 +1,7 @@
 package openfl._legacy; #if openfl_legacy
 
 
+import lime.app.Application;
 import openfl.display.BitmapData;
 import openfl.display.MovieClip;
 import openfl.display.Stage;
@@ -28,6 +29,8 @@ class Lib {
 	static public var REQUIRE_SHADERS = 0x0100;
 	static public var DEPTH_BUFFER = 0x0200;
 	static public var STENCIL_BUFFER = 0x0400;
+	
+	public static var application:Application;
 	
 	static public var company (default, null):String;
 	public static var current (get, null):MovieClip;
@@ -66,7 +69,7 @@ class Lib {
 	public static function close ():Void {
 		
 		Stage.__exiting = true;
-		var close = Lib.load ("lime", "lime_close", 0);
+		var close = Lib.load ("openfl-legacy", "openfl_legacy_close", 0);
 		close ();
 		
 	}
@@ -91,14 +94,14 @@ class Lib {
 		initWidth = width;
 		initHeight = height;
 		
-		var create_main_frame = Lib.load ("lime", "lime_create_main_frame", -1);
+		var create_main_frame = Lib.load ("openfl-legacy", "openfl_legacy_create_main_frame", -1);
 		
 		create_main_frame (function (frameHandle:Dynamic) {
 			
 			try {
 				
 				__mainFrame = frameHandle;
-				var stage_handle = lime_get_frame_stage (__mainFrame);
+				var stage_handle = openfl_legacy_get_frame_stage (__mainFrame);
 				
 				Lib.__stage = (stageClass == null ? new Stage (stage_handle, width, height) : Type.createInstance (stageClass, [ stage_handle, width, height]));
 				Lib.__stage.frameRate = frameRate;
@@ -248,7 +251,7 @@ class Lib {
 		if (result == null) {
 			
 			var slash = (sysName ().substr (7).toLowerCase () == "windows") ? "\\" : "/";
-			var haxelib = findHaxeLib ("lime");
+			var haxelib = findHaxeLib ("openfl");
 			
 			if (haxelib != "") {
 				
@@ -267,7 +270,7 @@ class Lib {
 		loaderTrace ("Result : " + result);
 		
 		#if neko
-		if (library == "lime") {
+		if (library == "openfl-legacy") {
 			
 			loadNekoAPI ();
 			
@@ -412,11 +415,11 @@ class Lib {
 		
 		if (!__loadedNekoAPI) {
 			
-			var init = load ("lime", "neko_init", 5);
+			var init = load ("openfl-legacy", "neko_init", 5);
 			
 			if (init != null) {
 				
-				loaderTrace ("Found nekoapi @ " + __moduleNames.get ("lime"));
+				loaderTrace ("Found nekoapi @ " + __moduleNames.get ("openfl-legacy"));
 				init (function(s) return new String (s), function (len:Int) { var r = []; if (len > 0) r[len - 1] = null; return r; }, null, true, false);
 				
 			} else {
@@ -457,7 +460,7 @@ class Lib {
 	
 	public static function forceClose ():Void {
 		
-		var terminate = Lib.load ("lime", "lime_terminate", 0);
+		var terminate = Lib.load ("openfl-legacy", "openfl_legacy_terminate", 0);
 		terminate ();
 		
 	}
@@ -474,14 +477,14 @@ class Lib {
 	
 	public static function getURL (url:URLRequest, target:String = null):Void {
 		
-		lime_get_url (url.url);
+		openfl.Lib.getURL (url, target);
 		
 	}
 	
 	
 	public static function pause ():Void {
 		
-		lime_pause_animation ();
+		
 		
 	}
 	
@@ -489,7 +492,7 @@ class Lib {
 	public static function postUICallback (inCallback:Void->Void):Void {
 		
 		#if android
-		lime_post_ui_callback (inCallback);
+		openfl_legacy_post_ui_callback (inCallback);
 		#else
 		inCallback ();
 		#end
@@ -499,14 +502,14 @@ class Lib {
 	
 	public static function resume ():Void {
 		
-		lime_resume_animation ();
+		
 		
 	}
 	
 	
 	public static function setIcon (path:String):Void {
 		
-		var set_icon = Lib.load ("lime", "lime_set_icon", 1);
+		var set_icon = Lib.load ("openfl-legacy", "openfl_legacy_set_icon", 1);
 		set_icon (path);
 		
 	}
@@ -519,7 +522,7 @@ class Lib {
 		Lib.packageName = packageName;
 		Lib.version = version;
 		
-		lime_set_package (company, file, packageName, version);
+		openfl_legacy_set_package (company, file, packageName, version);
 		
 	}
 	
@@ -585,13 +588,10 @@ class Lib {
 	
 	
 	#if android
-	private static var lime_post_ui_callback = Lib.load ("lime", "lime_post_ui_callback", 1);
+	private static var openfl_legacy_post_ui_callback = Lib.load ("openfl-legacy", "openfl_legacy_post_ui_callback", 1);
 	#end
-	private static var lime_set_package = Lib.load ("lime", "lime_set_package", 4);
-	private static var lime_get_frame_stage = Lib.load ("lime", "lime_get_frame_stage", 1);
-	private static var lime_get_url = Lib.load ("lime", "lime_get_url", 1);
-	private static var lime_pause_animation = Lib.load ("lime", "lime_pause_animation", 0);
-	private static var lime_resume_animation = Lib.load ("lime", "lime_resume_animation", 0);
+	private static var openfl_legacy_set_package = Lib.load ("openfl-legacy", "openfl_legacy_set_package", 4);
+	private static var openfl_legacy_get_frame_stage = Lib.load ("openfl-legacy", "openfl_legacy_get_frame_stage", 1);
 	
 	
 }
