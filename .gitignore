@@ -18,7 +18,7 @@ docs/*.xml
 docs/pages
 haxedoc.xml
 .temp
-legacy/ndll/*/lime*
-legacy/ndll/*/liblime*
+legacy/ndll/*/openfl-legacy*
+legacy/ndll/*/libopenfl-legacy*
 legacy/project/all_objs
 legacy/project/obj
