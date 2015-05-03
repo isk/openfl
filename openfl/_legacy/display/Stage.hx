@@ -39,7 +39,7 @@ import openfl._legacy.utils.JNI;
 class Stage extends DisplayObjectContainer {
 	
 	
-	@:noCompletion public static var __earlyWakeup = 0.005;
+	@:noCompletion public static var __earlyWakeup = 0.00003;
 	@:noCompletion public static var __exiting = false;
 	
 	public static var OrientationPortrait = 1;
@@ -540,7 +540,6 @@ class Stage extends DisplayObjectContainer {
 			
 		}
 		
-		result = __updateNextWake ();
 		return result;
 		
 	}
@@ -607,12 +606,7 @@ class Stage extends DisplayObjectContainer {
 		if (frameRate > 0) {
 			
 			var next = __nextRender - Timer.stamp () - __earlyWakeup;
-			if (next < otherTimers) {
-				
-				return next;
-				
-			}
-			
+			return next;
 		}
 		
 		return otherTimers;
@@ -1084,6 +1078,7 @@ class Stage extends DisplayObjectContainer {
 		
 		lime_render_stage (__handle);
 		
+		__updateNextWake();
 	}
 	
 	
